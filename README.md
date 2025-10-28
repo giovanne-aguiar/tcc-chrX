@@ -10,7 +10,7 @@
 
 ## Descrição
 
-Este repositório contém os scripts, os principais arquivos de referência utilizados, o pipeline utilizado e os resultados para a avaliação de metodologias de chamada de variantes genéticas no cromossomo X humano. A análise foi realizada a partir de dados de Sequenciamento de Nova Geração (NGS) de 30 amostras do projeto EPIGEN-Brasil.
+Este repositório contém os scripts, os principais arquivos de referência utilizados, o pipeline e os resultados para a avaliação de metodologias de chamada de variantes genéticas no cromossomo X humano. A análise foi realizada a partir de dados de Sequenciamento de Nova Geração (NGS) de 30 amostras do projeto EPIGEN-Brasil.
 
 O principal objetivo foi testar e comparar abordagens de bioinformática para lidar com as particularidades da genotipagem do cromossomo X.
 
