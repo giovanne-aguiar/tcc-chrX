@@ -1,0 +1,4 @@
+sample	sex	wgs	array
+A M caminho_da_amostra caminho_do_array
+B F caminho_da_amostra caminho_do_array
+C M caminho_da_amostra caminho_do_array

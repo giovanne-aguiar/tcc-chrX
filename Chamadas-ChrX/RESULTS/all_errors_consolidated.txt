@@ -1,0 +1,8 @@
+sample_id	sex	method	pos_array	rsid_array	ref_array	alt_array	gt_array	pos_wgs	rsid_wgs	ref_wgs	alt_wgs	gt_wgs
+A	M	joint_ploidy	2822282	23:2740323	G	T	1/0	2822282	.	G	T	0/0
+B	M	joint_ploidy	2885262	23:2803303	A	G	1/0	2885262	.	A	G	1/1
+C	M	joint_ploidy	2916682	23:2834723	C	T	1/0	2916682	.	C	T	0/0
+D	M	joint_ploidy	2931940	23:2849981	C	T	1/0	2931940	.	C	T	1/1
+E	M	joint_ploidy	3051498	23:2969539	G	A	1/0	3051498	.	G	A	0/0
+F	M	joint_ploidy	3125658	23:3043699	T	C	1/0	3125658	.	T	C	1/1
+G	M	joint_ploidy	3309641	23:3227682	T	G	1/0	3309641	.	T	G	0/0

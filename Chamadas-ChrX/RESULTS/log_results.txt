@@ -1,0 +1,90 @@
+=== ANÁLISE JOINT-FILTERED - Amostra A (M) ===
+Rodando comparação completa:
+Array = caminho_do_array
+WGS   = caminho_da_amostra
+Saída = caminho_de_saída
+============================================================
+ETAPA 1: Análise básica de variantes
+----------------------------------------
+Total variantes Array = 45723
+Total variantes WGS   = 33867
+Compartilhadas        = 33423
+Exclusivas Array      = 12300
+Exclusivas WGS        = 444
+Arquivos básicos salvos com sucesso!
+
+============================================================
+ETAPA 2: Análise detalhada com bcftools
+----------------------------------------
+Excluindo missing do Array:
+bcftools view -e 'GT="./."' -Oz -o saída_bcftools_array caminho_do_array && tabix saída_bcftools_array
+Excluindo missing do WGS:
+bcftools view -e 'GT="./." || GT="."' -Oz -o saída_bcftools_wgs caminho_da_amostra && tabix saída_bcftools_wgs
+
+Fazendo intersecção:
+bcftools isec saída_bcftools_array saída_bcftools_wgs -p caminho_de_saída
+
+Comprimindo arquivos de intersecção:
+bgzip -f caminho_de_saída/0002.vcf && bgzip -f caminho_de_saída/0003.vcf
+
+============================================================
+ETAPA 3: Comparação detalhada de genótipos
+----------------------------------------
+Carregados 33235 linhas do array e 33235 linhas do WGS
+Comparando 33234 variantes compartilhadas...
+
+============================================================
+RESULTADOS FINAIS:
+----------------------------------------
+Total de variantes compartilhadas: 33234
+Diferenças de genótipo: 39
+Diferenças REF/ALT: 0
+Taxa de concordância: 99.88%
+Taxa de erro: 0.12%
+============================================================
+
+=== ANÁLISE JOINT-FILTERED - Amostra B (F) ===
+Rodando comparação completa:
+Array = caminho_do_array
+WGS   = caminho_da_amostra
+Saída = caminho_de_saída
+============================================================
+ETAPA 1: Análise básica de variantes
+----------------------------------------
+Total variantes Array = 45723
+Total variantes WGS   = 33867
+Compartilhadas        = 33423
+Exclusivas Array      = 12300
+Exclusivas WGS        = 444
+Arquivos básicos salvos com sucesso!
+
+============================================================
+ETAPA 2: Análise detalhada com bcftools
+----------------------------------------
+Excluindo missing do Array:
+bcftools view -e 'GT="./."' -Oz -o saída_bcftools_array caminho_do_array && tabix saída_bcftools_array
+Excluindo missing do WGS:
+bcftools view -e 'GT="./." || GT="."' -Oz -o saída_bcftools_wgs caminho_da_amostra && tabix saída_bcftools_wgs
+
+Fazendo intersecção:
+bcftools isec saída_bcftools_array saída_bcftools_wgs -p caminho_de_saída
+
+Comprimindo arquivos de intersecção:
+bgzip -f caminho_de_saída/0002.vcf && bgzip -f caminho_de_saída/0003.vcf
+
+============================================================
+ETAPA 3: Comparação detalhada de genótipos
+----------------------------------------
+Carregados 33235 linhas do array e 33235 linhas do WGS
+Comparando 33234 variantes compartilhadas...
+
+============================================================
+RESULTADOS FINAIS:
+----------------------------------------
+Total de variantes compartilhadas: 33234
+Diferenças de genótipo: 39
+Diferenças REF/ALT: 0
+Taxa de concordância: 99.88%
+Taxa de erro: 0.12%
+============================================================
+
