@@ -1,0 +1,88 @@
+## Passo a passo manual "Filtragem de reads mapeadas ao cromossomo Y"
+
+🔹 **1. Extraia as reads que se alinharam no cromossomo X**
+
+```bash
+samtools view -@ 4 -b BAM_da_amostra chrX > BAM_chrX
+```
+
+🔹 **2. Converta o BAM do cromossomo X para FASTQ**
+
+```bash
+samtools fastq -@ 4 -1 FASTQ_R1 -2 FASTQ_R2 \
+  -0 /dev/null -s /dev/null -n BAM_chrX
+```
+
+🔹 **3. Alinhe contra o cromossomo Y isolado**
+
+Crie um índice BWA apenas com o cromossomo Y:
+
+Extraia o cromossomo Y do seu genoma de referência:
+
+```bash
+samtools faidx H_sapiens38_noalt.fasta chrY > chrY.fasta
+```
+
+Faça o índice:
+
+```bash
+bwa index chrY.fasta
+```
+
+🔸 Rode o alinhamento:
+
+```bash
+bwa mem -t 5 chrY.fasta FASTQ_R1 FASTQ_R2 | \
+samtools view -bt chrY.fasta -o BAM_Yalinhado
+```
+
+🔹 **4. Filtre as reads que se alinharam no cromossomo Y**
+
+Pegue os nomes das reads que mapearam no Y:
+
+```bash
+samtools view BAM_Yalinhado | cut -f1 | sort | uniq > READS_MAPEADAS_AO_Y.txt
+```
+
+🔹 **5. Remova essas reads do BAM original**
+
+```bash
+samtools view -@ 4 -h BAM_chrX | \
+grep -v -F -f READS_MAPEADAS_AO_Y.txt | \
+samtools view -@ 4 -b -o BAM_chrX_filtrado
+```
+
+🔹 **6. Converta de volta para FASTQ:
+
+```bash
+samtools fastq -@ 4 -1 FASTQ_FILTRADO_R1 -2 FASTQ_FILTRADO_R2 \
+  -0 /dev/null -s /dev/null -n BAM_chrX_filtrado
+```
+
+🔹 **7. Realinhe com o genoma completo normalmente:
+
+```bash
+bwa mem -t 5 H_sapiens38_noalt.fasta FASTQ_FILTRADO_R1 FASTQ_FILTRADO_R2 | \
+samtools view -bt H_sapiens38_noalt.fasta -o BAM_FINAL
+```
+
+🔹 **8. Adicione as informações do Header**
+
+```bash
+gatk AddOrReplaceReadGroups \
+    -I BAM_FINAL \
+    -O BAM_FINAL_COM_HEADER \
+    -RGID NA0MFPH4_LP6005064-DNA_G03 \
+    -RGLB EZ-DNAgenomicDNAisolationkit \
+    -RGPL Illumina \
+    -RGPU G03 \
+    -RGSM G03
+
+```
+
+🔹 **9. Ordene e indexe**
+
+```bash
+samtools sort -@ 4 -o BAM_FINAL_COM_HEADER_ORDENADO BAM_FINAL_COM_HEADER 
+samtools index BAM_FINAL_COM_HEADER_ORDENADO
+```
