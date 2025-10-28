@@ -2,8 +2,8 @@
 
 **Autor:** Giovanne de Aguiar Barra
 
-**Orientadores:** Rafael Tou
-			  Giovanna Giudicelli
+**Orientadores:** Rafael Tou,
+			  Giovanna Giudicelli,
 			  Eduardo Tarazona
 			  
 **Projeto:** Trabalho de Conclusão de Curso (TCC)
